@@ -9,7 +9,7 @@ A contributor's guide. Ada here is written as a strongly typed functional
 pipeline: minimize mutable state, drop the boilerplate loops, and favor a
 readable expression over a procedural block. Not "code golf" and not point-free
 cleverness. Ada 2012 and 2022 features do the work. Each point shows the
-imperative form to avoid, then the functional form to write.
+imperative form to avoid or minimize, then the functional form to write.
 
 ## Core expressions and immutability
 
