@@ -218,9 +218,11 @@ end loop;
 ```
 
 ```ada
---  right
+--  right: "&" is overloaded, so 'Reduce takes a named reducer
+function Concat (A, B : Unbounded_String) return Unbounded_String is (A & B);
+
 Combined : constant Unbounded_String :=
-   Parts'Reduce ("&", Null_Unbounded_String);
+   Parts'Reduce (Concat, Null_Unbounded_String);
 ```
 
 **13. Array comprehensions for maps.** `[for X of Source => F]` transforms a
@@ -491,12 +493,12 @@ type Option (Present : Boolean := False) is record
 end record;
 
 function None return Option is ((Present => False));
-function Some (V : Integer) return Option is ((Present => True, Value => V));
+function Just (V : Integer) return Option is ((Present => True, Value => V));  --  `Some` is reserved
 
 function Map_Some (O : Option) return Option is
    (case O.Present is
        when False => None,
-       when True  => Some (O.Value * 2));
+       when True  => Just (O.Value * 2));
 ```
 
 ```ada
@@ -593,7 +595,9 @@ generic
 function Map (Source : Vector) return Vector;
 
 function Map (Source : Vector) return Vector is
-   ([for X of Source => Transform (X)]);
+begin
+   return [for X of Source => Transform (X)];
+end Map;
 
 type Int_Array is array (Positive range <>) of Integer;
 function Square_All is new Map
@@ -670,7 +674,7 @@ function With_Score (T : Table; Name : String; N : Integer) return Table is
        Kept : constant Table :=
           [for P of T when To_String (P.Name) /= Name => P];
     begin
-       Kept & [(To_Unbounded_String (Name), N)]);
+       Kept & Pair'(To_Unbounded_String (Name), N));
 ```
 
 That builder copies. It is the right shape for a small pure table and the
@@ -688,8 +692,7 @@ only on pure units. It is not a per-subprogram marker.
 
 ```ada
 function Double (X : Integer) return Integer
-   with Global => null
-is (X * 2);
+   with Global => null;
 ```
 
 ```ada
@@ -698,8 +701,9 @@ pragma Pure (Transforms);
 
 Membership choice lists are the pattern guard. They need no separate matching
 language, and they compose with the quantified expressions already in the
-guide. A discriminant-dependent component is read inside a case expression,
-which is what narrows the variant.
+guide. A discriminant-dependent component like `Value` is present only in some
+variants, so read it inside a case expression, which narrows the discriminant
+instead of leaving a runtime discriminant check.
 
 ```ada
 function Is_Stop (K : Color) return Boolean is
@@ -720,8 +724,7 @@ function Abs_Val (X : Integer) return Integer
    with Global => null,
         Contract_Cases =>
           (X >= 0 => Abs_Val'Result = X,
-           X < 0  => Abs_Val'Result = -X)
-is (if X >= 0 then X else -X);
+           X < 0  => Abs_Val'Result = -X);
 ```
 
 ## Beyond these rules
