@@ -10,6 +10,8 @@ pipeline: minimize mutable state, drop the boilerplate loops, and favor a
 readable expression over a procedural block. Not "code golf" and not point-free
 cleverness. Ada 2012 and 2022 features do the work. Each point shows the
 imperative form to avoid or minimize, then the functional form to write.
+Rules 1–20 are expression-oriented; rules 21–30 add the next layer — immutable
+updates, algebraic data, and generic abstraction.
 
 ## Core expressions and immutability
 
@@ -385,7 +387,344 @@ Doubled  : constant Int_Array := [for X of Positive => X * 2];
 Total    : constant Integer   := Doubled'Reduce ("+", 0);
 ```
 
-## Beyond the twenty
+## Immutable updates
+
+Ada's functional style is not "make Ada look like OCaml." The language has
+mechanisms that give the benefits associated with ML-style programming —
+explicit data variants, total transformations, immutable values, parametric
+abstraction, local reasoning, and explicit effects — while keeping nominal
+typing, contracts, representation control, and a systems-programming model.
+An `access function` is not the higher-order idiom; a generic formal subprogram
+is.
+
+**21. Array delta aggregates.** Record `with delta` has an array form. It is
+the immutable indexed update. Array delta aggregates are one-dimensional only
+(RM 4.3.4); a multi-dimensional update is still an assignment or a rebuild.
+
+```ada
+--  wrong
+Next : Int_Array := Current;
+Next (I) := Next (I) + 1;
+```
+
+```ada
+--  right
+Next : constant Int_Array := (Current with delta I => Current (I) + 1);
+```
+
+GNAT's `Current'Update (I => Current (I) + 1)` is an implementation-defined
+attribute, not standard Ada. Prefer the delta aggregate. Both copy; neither
+mutates `Current`.
+
+**22. Target name `@`, only in an assignment.** `@` is legal only in the
+expression of an assignment statement (RM 5.2.1). It is not legal in a
+declaration, and a delta aggregate does not give it a special meaning of its
+own. Use it when mutation is already the point. The immutable form names the
+old value.
+
+```ada
+--  wrong: @ is not the base of a declaration
+Next : constant State := (Old with delta Count => @.Count + 1);
+```
+
+```ada
+--  right: immutable update names the source
+Next : constant State :=
+   (Old with delta
+       Count => Old.Count + 1,
+       Last  => Old.Last & Item);
+```
+
+```ada
+--  right: @ only where an assignment is already justified
+Node.Parent :=
+   (@ with delta
+       Count => @.Count + 1,
+       Sum   => @.Sum + Value);
+```
+
+## Algebraic data
+
+**23. Discriminated records are Ada's closest native equivalent to a sum
+type.** The equivalence is not exact: Ada variants are nominal, the
+discriminant is a real component, and recursive cases need an indirection.
+What transfers is the discipline. One type, alternatives distinguished by a
+discriminant, consumed by an exhaustive case expression.
+
+```ada
+type Node_Kind is (Leaf, Branch);
+
+type Tree;
+type Tree_Ref is access constant Tree;
+
+type Tree (Kind : Node_Kind) is record
+   case Kind is
+      when Leaf   => Value : Integer;
+      when Branch => Left, Right : Tree_Ref;
+   end case;
+end record;
+
+function Sum (T : Tree) return Integer is
+   (case T.Kind is
+       when Leaf   => T.Value,
+       when Branch => Sum (T.Left.all) + Sum (T.Right.all));
+```
+
+`Tree_Ref` is a shared pointer, not an owner. Do not treat it as a Rust box
+or an OCaml implicit heap cell. A library-level tree allocated with `new` is
+the simple case. A stack-allocated node cannot be designated by a
+library-level access. SPARK code should use an arena index instead of
+`access`.
+
+**24. Option and Result, matched by case.** Absence and failure are values.
+The core does not raise, and it does not use a sentinel. Bind is a case
+expression, or a generic whose formal is the continuation. It is not an
+`access function` parameter: an access-to-subprogram designates a subprogram
+and does not carry an environment of captured locals.
+
+```ada
+type Option (Present : Boolean := False) is record
+   case Present is
+      when False => null;
+      when True  => Value : Integer;
+   end case;
+end record;
+
+function None return Option is ((Present => False));
+function Some (V : Integer) return Option is ((Present => True, Value => V));
+
+function Map_Some (O : Option) return Option is
+   (case O.Present is
+       when False => None,
+       when True  => Some (O.Value * 2));
+```
+
+```ada
+type Result (Ok : Boolean := True) is record
+   case Ok is
+      when True  => Value : Integer;
+      when False => Why  : Error_Kind;
+   end case;
+end record;
+
+function Step (R : Result) return Result is
+   (case R.Ok is
+       when False => R,
+       when True  => Compute (R.Value));
+```
+
+The generic continuation belongs with the functor pattern below, not with an
+access parameter.
+
+## Controlled construction
+
+**25. Smart constructors enforce the invariant.** A private type whose
+visible part contains an expression function cannot see the full view, and a
+conversion written there does not establish the constraint. Declare the
+constructor in the visible part. Complete it where the full type is visible.
+The range is what rejects a bad value; a `Pre` only documents the same rule.
+
+```ada
+package Units is
+   type Celsius is private;
+   function C (Degrees : Float) return Celsius
+      with Pre => Degrees >= -273.15;
+   function To_Float (T : Celsius) return Float;
+private
+   type Celsius is new Float range -273.15 .. Float'Last;
+end Units;
+```
+
+```ada
+package body Units is
+   function C (Degrees : Float) return Celsius is
+      (Celsius (Degrees));          --  range check, Constraint_Error if not
+   function To_Float (T : Celsius) return Float is
+      (Float (T));
+end Units;
+```
+
+An expression function may complete the visible declaration in the private
+part, after the full type (AI12-0103). Prefer the body unless the package is
+required to have no body. The point of the pattern is that an out-of-range
+argument cannot become a `Celsius`, not that the type is spelled `private`.
+
+## Higher-order abstraction
+
+**26. Generics are the functor.** Ada has no first-class modules. A generic
+package with a formal type and a formal subprogram is the architectural
+equivalent that does exist: formal type plus formal operation, instantiation,
+concrete abstraction. This is the higher-order idiom. Do not teach
+`F : access function (...)` as the normal one.
+
+```ada
+generic
+   type Element is private;
+   with function Transform (X : Element) return Element;
+package Mapped is
+   type Vector is array (Positive range <>) of Element;
+   function Apply (Source : Vector) return Vector;
+end Mapped;
+```
+
+```ada
+package body Mapped is
+   function Apply (Source : Vector) return Vector is
+      ([for X of Source => Transform (X)]);
+end Mapped;
+```
+
+```ada
+function Square (X : Integer) return Integer is (X * X);
+package Int_Map is new Mapped (Integer, Square);
+--  Int_Map.Apply (Values)
+```
+
+A generic function is the small form of the same idea. The formal array type
+must be matched by an unconstrained actual with the same index subtype and
+component type (RM 12.5.3). Named associations make that match readable.
+
+```ada
+generic
+   type Element is private;
+   type Index is (<>);
+   type Vector is array (Index range <>) of Element;
+   with function Transform (X : Element) return Element;
+function Map (Source : Vector) return Vector;
+
+function Map (Source : Vector) return Vector is
+   ([for X of Source => Transform (X)]);
+
+type Int_Array is array (Positive range <>) of Integer;
+function Square_All is new Map
+   (Element   => Integer,
+    Index     => Positive,
+    Vector    => Int_Array,
+    Transform => Square);
+```
+
+Filter is a comprehension at the call site, or a builder that returns a
+container. A generic that returns a shorter unconstrained array is legal in
+outline and sharp in the bounds rules; do not publish it without a GNAT run.
+
+**27. Local expression functions are `let`.** A body is the right construct
+when the transformation needs a named local function. Declare expressions
+cannot hold subprograms (RM 4.5.9: constants and object renamings only). Keep
+each local an expression function, and keep the body to one return.
+
+```ada
+function Normalize (X : Float) return Float is
+   function Clamp (V : Float) return Float is
+      (if V < 0.0 then 0.0 elsif V > 1.0 then 1.0 else V);
+begin
+   return Clamp (X / Scale);
+end Normalize;
+```
+
+## Functional collections
+
+**28. A functional list whose spine operations copy is not a functional
+list.** `Tail` is only a structural operation if it is cheap. Do not introduce
+an abstraction whose mathematical look hides a linear copy. Four
+representations are different designs:
+
+- a persistent linked list, `access constant`, shared tails, not SPARK
+- a copying linked list, simple and usually the wrong default
+- a vector plus offset, `Tail` advances the offset and shares storage
+- a bounded or arena-indexed list, the SPARK representation
+
+The API can still read as Nil and Cons. The representation has to be chosen
+before the recursion is written.
+
+```ada
+function Is_Nil (L : List) return Boolean;
+function Head (L : List) return Element with Pre => not Is_Nil (L);
+function Tail (L : List) return List    with Pre => not Is_Nil (L);
+function Cons (H : Element; T : List) return List;
+
+--  only if Tail shares structure or advances an offset
+function Length (L : List) return Natural is
+   (if Is_Nil (L) then 0 else 1 + Length (Tail (L)));
+```
+
+If `Tail` copies, fold with `'Reduce` or walk an index. Recursive `Map` on a
+copying spine is quadratic.
+
+**29. Persistent-style builders, not standard maps.** `Ada.Containers`
+maps and vectors are imperative. A constant initialized from an aggregate
+does not give the container persistent update semantics, and a comprehension
+that rebuilds an `Ordered_Maps.Map` is not the natural operation. Small pure
+tables are association lists. Large tables are mutated in place, under the
+same rule as a cursor or a buffer.
+
+```ada
+type Pair is record
+   Name : Unbounded_String;
+   N    : Integer;
+end record;
+
+type Table is array (Positive range <>) of Pair;
+
+function With_Score (T : Table; Name : String; N : Integer) return Table is
+   (declare
+       Kept : constant Table :=
+          [for P of T when To_String (P.Name) /= Name => P];
+    begin
+       Kept & [(To_Unbounded_String (Name), N)]);
+```
+
+That builder copies. It is the right shape for a small pure table and the
+wrong shape for a large one. For a large one, `Insert` on an `in out` map is
+the honest operation, not a persistent metaphor laid over
+`Ada.Containers`.
+
+## Contracts and effects
+
+**30. `Global => null` is a SPARK contract, not an effect system.** It says
+the subprogram has no global variable inputs or outputs. Ada does not track
+effects the way an ML or Haskell effect system does. `pragma Pure` is a
+library-unit annotation: the unit declares no library-level state and depends
+only on pure units. It is not a per-subprogram marker.
+
+```ada
+function Double (X : Integer) return Integer
+   with Global => null
+is (X * 2);
+```
+
+```ada
+pragma Pure (Transforms);
+```
+
+Membership choice lists are the pattern guard. They need no separate matching
+language, and they compose with the quantified expressions already in the
+guide. A discriminant-dependent component is read inside a case expression,
+which is what narrows the variant.
+
+```ada
+function Is_Stop (K : Color) return Boolean is
+   (K in Red | Yellow);
+
+All_Safe : constant Boolean :=
+   (for all N of Nodes =>
+      (case N.Kind is
+          when Leaf   => N.Value >= 0,
+          when others => True));
+```
+
+`Contract_Cases` is the SPARK form of a function specified by clauses. Use it
+when the postcondition splits on the input, not as a second body.
+
+```ada
+function Abs_Val (X : Integer) return Integer
+   with Global => null,
+        Contract_Cases =>
+          (X >= 0 => Abs_Val'Result = X,
+           X < 0  => Abs_Val'Result = -X)
+is (if X >= 0 then X else -X);
+```
+
+## Beyond these rules
 
 **Compiler switches are your linter.** Build strict, and treat warnings as
 errors in development.
@@ -420,7 +759,7 @@ Append (Buffer, Value);
 
 ```ada
 --  right
-Result : constant Unbounded_String := "prefix:" & Value;
+Result : constant Unbounded_String := To_Unbounded_String ("prefix:") & Value;
 ```
 
 **Short-circuit `and then` / `or else`, always.** Never plain `and` / `or` for
