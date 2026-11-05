@@ -53,6 +53,6 @@ CSV is the universal business interchange format. The csv tool lets you use it s
 ## Writings
 
 - [Ada functional style guidelines](ada-style-guidelines.html): a style guide for functional-style Ada. Every example is compiled with GNAT.
-- [What the Viking Poets Knew](https://github.com/moebiusV/papers/tree/main/papers/viking-poets): a book arguing that AI's reliability problem is the one the Viking skalds solved, keeping knowledge intact when every act of storage is lossy.
+- [What the Viking Poets Knew](https://github.com/moebiusV/papers/tree/main/papers/viking-poets): a book on what the mystical traditions of ancient societies that have stood the test of time can bring to AI research. The answer: quite a lot.
 - [12 Hz Power Grid for National Energy Sovereignty](https://github.com/moebiusV/papers/tree/main/papers/12hz-power-grid): six papers on running a grid at 12 Hz, so transformer cores can use commodity steel instead of specialty grain-oriented steel from a handful of foreign mills.
 - [papers](https://github.com/moebiusV/papers): technical whitepapers and policy briefs in the public interest.
