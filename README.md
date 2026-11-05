@@ -35,6 +35,7 @@ Ada was written for the US Department of Defense (MIL-STD-1815). These projects 
 CSV is the universal business interchange format. The csv tool lets you use it securely, safely, and easily from the Unix command line and in scripts.
 
 - [winless](https://github.com/moebiusV/winless): a less pager for Windows, with annotation and editing based on vim.
+- [bepsi](https://github.com/moebiusV/bepsi) *(wip)*: automated payments for real-world goods. Pay crypto, get a beverage.
 - [buildabook](https://github.com/moebiusV/buildabook): build a printable book from Markdown and Typst files, with cover, table of contents, and footnotes.
 - [ytran](https://github.com/moebiusV/ytran): fetch YouTube transcripts, clean them up with Claude, and store searchable summaries in a local SQLite database.
 - [bs3](https://github.com/moebiusV/bs3): an interactive terminal browser for SQLite databases, with vi-style navigation and CGA colors.
