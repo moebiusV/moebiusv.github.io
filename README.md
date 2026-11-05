@@ -11,7 +11,7 @@ Ada was commissioned by the US Department of Defense for software that can't be 
 - [imp72](https://github.com/moebiusV/imp72) — Edgar "Ned" Irons's extensible systems language, developed at the NSA, where it ran their Folklore time-sharing system. Walter Bilofsky's 1973 PDP-10 implementation, rebuilt on LLVM for Linux, BSD, and macOS.
 - [ada-on-alpine](https://github.com/moebiusV/ada-on-alpine) — a complete Ada development toolchain packaged for Alpine Linux.
 - [imsg-ada](https://github.com/moebiusV/imsg-ada) — Ada implementation of the OpenBSD imsg wire protocol and API for inter-process communication.
-- [soja](https://github.com/moebiusV/soja) — an IRC bouncer in Ada 2022, translated from scratch from soju and built on the ada-on-alpine packages. *We are all sojas now.*
+- [soja](https://github.com/moebiusV/soja) *(wip)* — an IRC bouncer in Ada 2022, translated from scratch from soju and built on the ada-on-alpine packages. *We are all sojas now.*
 - [libsodium-ada](https://github.com/moebiusV/libsodium-ada) — Ada wrapper for the libsodium cryptography library.
 - [mustache-ada](https://github.com/moebiusV/mustache-ada) — Ada implementation of the Mustache template language and API.
 - [Ada functional style guidelines](ada-style-guidelines.html) — a style guide for functional-style Ada, with every example compiled with GNAT.
