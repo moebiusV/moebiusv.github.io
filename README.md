@@ -14,7 +14,6 @@ Ada was written for the US Department of Defense (MIL-STD-1815). These projects 
 - [soja](https://github.com/moebiusV/soja) *(wip)*: an IRC bouncer in Ada 2022, translated from soju. *We are all sojas now.*
 - [libsodium-ada](https://github.com/moebiusV/libsodium-ada): Ada wrapper for the libsodium cryptography library.
 - [mustache-ada](https://github.com/moebiusV/mustache-ada): Ada implementation of the Mustache template language and API.
-- [Ada functional style guidelines](ada-style-guidelines.html): a style guide for functional-style Ada. Every example is compiled with GNAT.
 
 ## Computer archaeology
 
@@ -47,7 +46,13 @@ CSV is the universal business interchange format. The csv tool lets you use it s
 - [seatuya](https://github.com/moebiusV/seatuya): a C library with a stable ABI for local Tuya smart-device control, usable from any language with FFI.
 - [tuyapp](https://github.com/moebiusV/tuyapp) (fork): a C++ client library for the local Tuya API.
 
-## Systems and writing
+## Networking
 
 - [9Frank](https://github.com/moebiusV/9Frank): a network filesystem protocol that is a superset of all 9P2000 dialects, plus improvements.
-- [papers](https://github.com/moebiusV/papers): research papers, position papers, proposals, and technical briefs.
+
+## Writings
+
+- [Ada functional style guidelines](ada-style-guidelines.html): a style guide for functional-style Ada. Every example is compiled with GNAT.
+- [What the Viking Poets Knew](https://github.com/moebiusV/papers/tree/main/papers/viking-poets): a book arguing that AI's reliability problem is the one the Viking skalds solved, keeping knowledge intact when every act of storage is lossy.
+- [12 Hz Power Grid for National Energy Sovereignty](https://github.com/moebiusV/papers/tree/main/papers/12hz-power-grid): six papers on running a grid at 12 Hz, so transformer cores can use commodity steel instead of specialty grain-oriented steel from a handful of foreign mills.
+- [papers](https://github.com/moebiusV/papers): technical whitepapers and policy briefs in the public interest. Also includes *Vom Wagner zum Walther*, on how similar the Germanic languages are once the imposed standardization is undone.
