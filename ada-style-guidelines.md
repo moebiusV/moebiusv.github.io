@@ -10,7 +10,7 @@ pipeline: minimize mutable state, drop the boilerplate loops, and favor a
 readable expression over a procedural block. Not "code golf" and not point-free
 cleverness. Ada 2012 and 2022 features do the work. Each point shows the
 imperative form to avoid or minimize, then the functional form to write.
-Rules 1–20 are expression-oriented; rules 21–30 add the next layer — immutable
+Rules 1-20 are expression-oriented; rules 21-30 add the next layer: immutable
 updates, algebraic data, and generic abstraction.
 
 ## Core expressions and immutability
@@ -106,8 +106,8 @@ function Area (R : Float) return Float is
 
 **6. Minimize `out` / `in out` parameters.** Prefer a function that returns new
 state.  But Ada is not a purely functional language, and the programs built
-here — parsers advancing a cursor, bindings filling a caller's buffer, daemons
-holding live state — genuinely mutate.  Reach for `in out` when mutation is the
+here (parsers advancing a cursor, bindings filling a caller's buffer, daemons
+holding live state) genuinely mutate.  Reach for `in out` when mutation is the
 point; the rule is *minimize and localize*, not *never*.
 
 ```ada
@@ -392,9 +392,9 @@ Total    : constant Integer   := Doubled'Reduce ("+", 0);
 ## Immutable updates
 
 Ada's functional style is not "make Ada look like OCaml." The language has
-mechanisms that give the benefits associated with ML-style programming —
-explicit data variants, total transformations, immutable values, parametric
-abstraction, local reasoning, and explicit effects — while keeping nominal
+mechanisms that give the benefits associated with ML-style programming
+(explicit data variants, total transformations, immutable values, parametric
+abstraction, local reasoning, and explicit effects) while keeping nominal
 typing, contracts, representation control, and a systems-programming model.
 An `access function` is not the higher-order idiom; a generic formal subprogram
 is.
