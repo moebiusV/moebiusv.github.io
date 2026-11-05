@@ -1,5 +1,7 @@
 # moebiusv
 
+[Defensive coding](#defensive-coding) · [Computer archaeology](#computer-archaeology) · [AI](#ai) · [Business and productivity](#business-and-productivity) · [Home automation, robotics, and device control](#home-automation-robotics-and-device-control) · [Networking](#networking) · [Writings](#writings)
+
 I work in open source on Linux and BSD. Over the years I've contributed to Debian, the Linux kernel, the FreeBSD kernel, OpenBSD, and the newLisp programming language. Lately I've been working on Alpine Linux.
 
 ## Defensive coding
