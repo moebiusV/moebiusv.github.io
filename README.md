@@ -46,7 +46,6 @@ CSV is the universal business interchange format. The csv tool lets you use it s
 
 - [bepsi](https://moebiusv.github.io/bepsi/) *(wip)*: code for the DCTRL Bepsi machine. Pay crypto, get a beverage.
 - [seatuya](https://github.com/moebiusV/seatuya): a C library with a stable ABI for local Tuya smart-device control, usable from any language with FFI.
-- [tuyapp](https://github.com/moebiusV/tuyapp) (fork): a C++ client library for the local Tuya API.
 
 ## Networking
 
