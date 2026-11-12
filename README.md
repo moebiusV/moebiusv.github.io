@@ -42,7 +42,7 @@ CSV is the universal business interchange format. The csv tool lets you use it s
 - [ytran](https://moebiusv.github.io/ytran/): fetch YouTube transcripts, clean them up with Claude, and store searchable summaries in a local SQLite database.
 - [bs3](https://moebiusv.github.io/bs3/): an interactive terminal browser for SQLite databases, with vi-style navigation and CGA colors.
 - [csv](https://moebiusv.github.io/csv/): a Unix-style CSV processor with head, tail, cut, grep, sort, and more. It is CSV-aware, handles headers and comments, and works in pipes.
-- [wsl-dns-forward](https://moebiusv.github.io/wsl-dns-forward/): makes .local printer and computer names resolve inside WSL2 on Windows 10, so ssh, ping, and CUPS find them. Includes a Windows 11 upgrade path.
+- [wsl-dns-forward](https://moebiusv.github.io/wsl-dns-forward/): makes .local printer and computer names resolve inside WSL2 on Windows 10, so ssh, ping, and CUPS find them. It is for Windows 10; it is compatible with Windows 11, which does not need it.
 
 ## Home automation, robotics, and device control
 
@@ -52,7 +52,7 @@ CSV is the universal business interchange format. The csv tool lets you use it s
 ## Networking
 
 - [9Frank](https://moebiusv.github.io/9Frank/): a network filesystem protocol that is a superset of all 9P2000 dialects, plus improvements.
-- [wsl-dns-forward](https://moebiusv.github.io/wsl-dns-forward/): a local DNS forwarder that answers .local (mDNS) questions inside WSL2 through Windows and passes every other question to the normal DNS server.
+- [wsl-dns-forward](https://moebiusv.github.io/wsl-dns-forward/): a local DNS forwarder that answers .local (mDNS) questions inside WSL2 through Windows and passes every other question to the normal DNS server. For Windows 10; compatible with Windows 11, which does not need it.
 
 ## Writings
 
