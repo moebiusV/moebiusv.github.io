@@ -38,7 +38,7 @@ CSV is the universal business interchange format. The csv tool lets you use it s
 
 - [winless](https://moebiusv.github.io/winless/): a less pager for Windows, with annotation and editing based on vim.
 - [bepsi](https://moebiusv.github.io/bepsi/) *(wip)*: automated payments for real-world goods. Pay crypto, get a beverage.
-- [buildabook](https://moebiusv.github.io/buildabook/): build a printable book from Markdown and Typst files, with cover, table of contents, and footnotes.
+- [buildabook](https://moebiusv.github.io/buildabook/): builds a finished book, cover included, ready to send straight to the printer, and makes sure the page numbers, footnotes, table of contents and everything else are correct. Keywords: Markdown, Typst.
 - [ytran](https://moebiusv.github.io/ytran/): fetch YouTube transcripts, clean them up with Claude, and store searchable summaries in a local SQLite database.
 - [bs3](https://moebiusv.github.io/bs3/): an interactive terminal browser for SQLite databases, with vi-style navigation and CGA colors.
 - [csv](https://moebiusv.github.io/csv/): a Unix-style CSV processor with head, tail, cut, grep, sort, and more. It is CSV-aware, handles headers and comments, and works in pipes.
