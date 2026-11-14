@@ -37,7 +37,7 @@ The Ada language was designed for the US Department of Defense and became MIL-ST
 CSV is the universal business interchange format. The csv tool lets you use it securely, safely, and easily from the Unix command line and in scripts.
 
 - [winless](https://moebiusv.github.io/winless/): a vi-like text editor for Windows. It can run remotely over ssh, and makes it very easy to annotate, edit, and correct documents directly or with the help of an AI.
-- [bepsi](https://moebiusv.github.io/bepsi/) *(wip)*: automated payments for real-world goods. Pay crypto, get a beverage.
+- [bepsi](https://moebiusv.github.io/bepsi/) *(wip)*: code for the famous DCTRL (Decentral, Decontrol) Pepsi machine. Pay crypto, get a beverage: whatever we stocked the machine with. Sometimes things get wild. Solenoids and a Raspberry Pi make it work.
 - [buildabook](https://moebiusv.github.io/buildabook/): builds a finished book, cover included, ready to send straight to the printer. Makes sure the page numbers, footnotes, table of contents and everything else are correct. Keywords: Markdown, Typst, PDF.
 - [ytran](https://moebiusv.github.io/ytran/): fetch YouTube transcripts, clean them up with Claude, write an executive summary, and store them in a local database.
 - [bs3](https://moebiusv.github.io/bs3/): an interactive terminal browser for SQLite databases, with vi-style navigation.  Makes it easy to explore and edit your databases with a few keystrokes.
