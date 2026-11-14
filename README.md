@@ -46,12 +46,12 @@ CSV is the universal business interchange format. The csv tool lets you use it s
 
 ## Home Automation, Robotics, and Device Control
 
-- [bepsi](https://moebiusv.github.io/bepsi/) *(wip)*: code for the DCTRL Bepsi machine. Pay crypto, get a beverage.
-- [seatuya](https://moebiusv.github.io/seatuya/): a C library with a stable ABI for local Tuya smart-device control. Makes it easy to connect to and control Tuya devices from any programming language. I use it for temperature control when making cheese.
+- [bepsi](https://moebiusv.github.io/bepsi/) *(wip)*: code for the famous DCTRL (Decentral, Decontrol) Pepsi machine. Pay crypto, get a beverage: whatever we stocked the machine with. Sometimes things get wild. Solenoids and a Raspberry Pi make it work.
+- [seatuya](https://moebiusv.github.io/seatuya/): a C library with a stable ABI for local Tuya smart-device control. Makes it easy to connect to and control Tuya devices over Wi-Fi from any programming language. I use it for temperature control when making cheese.
 
 ## Networking
 
-- [9Frank](https://moebiusv.github.io/9Frank/): a network filesystem protocol that is a superset of all 9P2000 dialects, plus improvements.
+- [9Frank](https://moebiusv.github.io/9Frank/): a network filesystem protocol that is a superset of all 9P2000 dialects, combining their good features.
 - [wsl-dns-forward](https://moebiusv.github.io/wsl-dns-forward/): makes .local printer and computer names resolve inside WSL2 on Windows 10, so ssh, ping, and CUPS find them. It is for Windows 10; it is compatible with Windows 11, although not needed there.
 
 ## Writings
