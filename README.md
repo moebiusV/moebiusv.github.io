@@ -14,7 +14,7 @@ Ada was written for the US Department of Defense (MIL-STD-1815). These projects 
 - [cruntime](https://moebiusv.github.io/cruntime/): the headers, start files, C library and libm of Linux (glibc and musl), Windows (mingw-w64) and the BSDs, one directory per OS, version and architecture, laid out as a `--sysroot`: everything LLVM needs to cross compile for them, from any project. Begun for imp72, not specific to it.
 - [ada-on-alpine](https://moebiusv.github.io/ada-on-alpine/): a complete Ada development toolchain packaged for Alpine Linux.
 - [imsg-ada](https://moebiusv.github.io/imsg-ada/): Ada implementation of the OpenBSD imsg wire protocol and API for inter-process communication.
-- [soja](https://moebiusv.github.io/soja/) *(wip)*: an IRC bouncer in Ada 2022, translated from soju. *We are all sojas now.*
+- [soja](https://moebiusv.github.io/soja/): a drop-in replacement for the soju IRC bouncer, written in Ada 2022: same configuration, database and BouncerServ commands, with OAuth 2, PAM, Web Push and SASL EXTERNAL certificates. *We are all sojas now.*
 - [libsodium-ada](https://moebiusv.github.io/libsodium-ada/): Ada wrapper for the libsodium cryptography library.
 - [mustache-ada](https://moebiusv.github.io/mustache-ada/): Ada implementation of the Mustache template language and API.
 
