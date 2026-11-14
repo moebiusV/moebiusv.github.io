@@ -1,24 +1,24 @@
 # moebiusv
 
-[Security](#defensive-coding) | [Computer History](#computer-archaeology) | [AI](#ai) | [Business and Productivity](#business-and-productivity) | [Home automation, robotics, and device control](#home-automation-robotics-and-device-control) | [Networking](#networking) | [Writings](#writings)
+[Security](#security) | [Computer History](#computer-history) | [AI](#ai) | [Business and Productivity](#business-and-productivity) | [Home Automation, Robotics, and Device Control](#home-automation-robotics-and-device-control) | [Networking](#networking) | [Writings](#writings)
 
 I work in open source on Linux and BSD. Over the years I've contributed to Debian, the Linux kernel, the FreeBSD kernel, OpenBSD, and the newLisp programming language. Lately Alpine Linux and the Ada language have my attention.
 
-## Defensive coding
+## Security
 
 **Military grade for the modern age.**
 
 The Ada language was designed for the US Department of Defense and became MIL-STD-1815 in 1980. These projects make it accessible for everyday programming on modern open source operating systems: Linux, BSD, macOS, and Windows.
 
 - [imp72](https://moebiusv.github.io/imp72/): Edgar "Ned" Irons's extensible systems language, developed at the NSA and used for their Folklore time-sharing system. Walter Bilofsky's 1973 PDP-10 implementation, ported to LLVM for Linux, BSD, and macOS, and it makes programs for Windows too (mingw-w64, tested under Wine). Cross compiling is one command, for Linux (glibc and musl), the BSDs, macOS, and Windows: `imp --target=aarch64-linux-gnu prog.imp` fetches the target's C library and headers from [cruntime](https://moebiusv.github.io/cruntime/) and links.
-- [cruntime](https://moebiusv.github.io/cruntime/): the headers, start files, C library and libm of Linux (glibc and musl), Windows (mingw-w64) and the BSDs, one directory per OS, version and architecture, laid out as a `--sysroot`: everything LLVM needs to cross compile for them, from any project. Begun for imp72, not specific to it.  Any cross compiler can use it.
+- [cruntime](https://moebiusv.github.io/cruntime/): the headers, start files, C library and libm of Linux (glibc and musl), Windows (mingw-w64) and the BSDs, one directory per OS, version and architecture, laid out as a `--sysroot`: everything LLVM needs to cross compile for them. Begun for imp72, not specific to it. Any cross compiler can use it.
 - [ada-on-alpine](https://moebiusv.github.io/ada-on-alpine/): a complete Ada development toolchain packaged for Alpine Linux.
 - [imsg-ada](https://moebiusv.github.io/imsg-ada/): Ada implementation of the OpenBSD imsg wire protocol and API for inter-process communication.
 - [soja](https://moebiusv.github.io/soja/): a drop-in replacement for the soju IRC bouncer, written in Ada 2022: same configuration, database and BouncerServ commands, with OAuth 2, PAM, Web Push and SASL EXTERNAL certificates. *We are all sojas now.*
 - [libsodium-ada](https://moebiusv.github.io/libsodium-ada/): Ada wrapper for the libsodium cryptography library.
 - [mustache-ada](https://moebiusv.github.io/mustache-ada/): Ada implementation of the Mustache template language and API.
 
-## Computer archaeology
+## Computer History
 
 - [pdp64](https://moebiusv.github.io/pdp64/): the PDP-11 architecture extended to 64 bits and SMP.
 - [pcc](https://moebiusv.github.io/pcc/) (fork): the Portable C Compiler. Includes the optimizations from Dennis Ritchie's original PDP-11 compiler and Steve Johnson's VAX compiler, and now produces code even better than the originals. Until the fixes are merged, upstream produces code 60% larger than the original compilers did. Also adds AArch64 and pdp64 CPU backends for testing porting and cross compiling. The Ritchie and Johnson optimizations benefit all architectures.
@@ -32,7 +32,7 @@ The Ada language was designed for the US Department of Defense and became MIL-ST
 - [cngpt](https://moebiusv.github.io/cngpt/): nanoGPT translated to C, with full speed optimizations.  OpenBLAS matmul, full backprop, and a compiler benchmark harness.
 - [cugpt](https://moebiusv.github.io/cugpt/): microgpt translated to C, with full speed optimizations.  One with tape autograd and one with BLAS manual backprop.
 
-## Business and productivity
+## Business and Productivity
 
 CSV is the universal business interchange format. The csv tool lets you use it securely, safely, and easily from the Unix command line and in scripts.
 
@@ -44,7 +44,7 @@ CSV is the universal business interchange format. The csv tool lets you use it s
 - [csv](https://moebiusv.github.io/csv/): work with your CSV business data files from the Unix command line. Includes head, tail, cut, grep, sort, and more. It handles CSV headers and comments, and works in Unix pipelines.
 - [wsl-dns-forward](https://moebiusv.github.io/wsl-dns-forward/): makes .local printer and computer names resolve inside WSL2 on Windows 10, so ssh, ping, and CUPS find them. It is for Windows 10; it is compatible with Windows 11, although not needed there.
 
-## Home automation, robotics, and device control
+## Home Automation, Robotics, and Device Control
 
 - [bepsi](https://moebiusv.github.io/bepsi/) *(wip)*: code for the DCTRL Bepsi machine. Pay crypto, get a beverage.
 - [seatuya](https://moebiusv.github.io/seatuya/): a C library with a stable ABI for local Tuya smart-device control. Makes it easy to connect to and control Tuya devices from any programming language. I use it for temperature control when making cheese.
