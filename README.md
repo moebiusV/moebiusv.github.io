@@ -29,7 +29,7 @@ The Ada language was designed for the US Department of Defense and became MIL-ST
 ## AI
 
 - [hbnf](https://moebiusv.github.io/hbnf/): HyperBNF is a parser generator and compiler-compiler that solves some of the major pain points of parsing.  Emits parsing code in the major languages (C, Rust, Zig, and Ada) to be included directly in your program. From small configuration files, to binary wire protocols, to complex languages like COBOL and C++, it does it all in a form that is compact, readable, and very efficient. No LR conflicts ever!  The compact but clear grammars allow AI to implement compilers and other things much faster and more efficiently.
-- [cngpt](https://moebiusv.github.io/cngpt/): nanoGPT translated to C, with full speed optimizations.  OpenBLAS matmul, full backprop, and a compiler benchmark harness.
+- [cngpt](https://moebiusv.github.io/cngpt/): nanoGPT translated to C, with full speed optimizations.  OpenBLAS matmul, full backprop, and a compiler benchmark harness. Up to 1.6 times faster than the original PyTorch nanoGPT on the same CPU.
 - [cugpt](https://moebiusv.github.io/cugpt/): microgpt translated to C, with full speed optimizations.  One with tape autograd and one with BLAS manual backprop. Up to 2500 times faster than the original Python code.
 
 ## Business and Productivity
