@@ -27,7 +27,8 @@ What started as a light refresh of the PDP-11 for modern times turned into a spe
 - [llvm-pdp64](https://moebiusv.github.io/llvm-pdp64/): the LLVM back end for the pdp64, including its use of the vector unit.
 - [qemu-pdp64](https://moebiusv.github.io/qemu-pdp64/): the pdp64 machine for QEMU, with a PCI Express bus, an IOMMU, and hypervisor mode.
 - [pcc-pdp64](https://github.com/moebiusV/pcc/tree/pdp64): the Portable C Compiler with the pdp64 back end, built on [pcc-dmr](https://github.com/moebiusV/pcc/tree/dmr), our fork with the optimizations from the original PDP-11 and VAX compilers.
-- [openbsd-pdp64](https://github.com/moebiusV/openbsd-pdp64/tree/pdp64/pdp64-port): the OpenBSD port: the plan, the assembly to translate, what the compiler must provide, and what each of OpenBSD's mitigations costs on this machine.
+- [openbsd-pdp64](https://moebiusv.github.io/openbsd-pdp64/): the OpenBSD port: the plan, the assembly to translate, what the compiler must provide, and what each of OpenBSD's mitigations costs on this machine.
+- [debian-pdp64](https://github.com/moebiusV/debian-pdp64): the Debian port: the smallest bootable Debian 13 you can ssh into, and the plan for it. It follows the OpenBSD port.
 
 ## Compilers
 
