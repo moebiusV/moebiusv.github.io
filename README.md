@@ -24,8 +24,8 @@ The Ada language was designed for the US Department of Defense and became MIL-ST
 What started as a light refresh of the PDP-11 for modern times turned into a speedrun through computer history. We added the good bits from the Commodore 64, Blit, VT100, and KiTTY terminals. We made virtio devices the default. We bumped it up to 64-bit registers and addresses. SMP support. A vector unit for graphics and AI, and hypervisor support for cloud usage. We reviewed 50 years of Unix kernel bugs and security issues, and tweaked the architecture to mitigate or eliminate every one. Our guiding principle was easy to use and understand at an assembly language level, and simplicity of security.
 
 - [pdp64](https://moebiusv.github.io/pdp64/): the PDP-11 architecture expanded to 64 bits and SMP. Along the way, the design incorporated the lessons of other CPU architectures since the PDP-11 was released in 1970, to make operating systems and software faster, safer, more secure, and more reliable. The manual, the grammars everything else is generated from, the assembler, linker, and simulator.
-- [llvm-pdp64](https://github.com/moebiusV/llvm-pdp64): the LLVM back end for the pdp64, including its use of the vector unit.
-- [qemu-pdp64](https://github.com/moebiusV/qemu-pdp64): the pdp64 machine for QEMU, with a PCI Express bus, an IOMMU, and hypervisor mode.
+- [llvm-pdp64](https://moebiusv.github.io/llvm-pdp64/): the LLVM back end for the pdp64, including its use of the vector unit.
+- [qemu-pdp64](https://moebiusv.github.io/qemu-pdp64/): the pdp64 machine for QEMU, with a PCI Express bus, an IOMMU, and hypervisor mode.
 - [pcc-pdp64](https://github.com/moebiusV/pcc/tree/pdp64): the Portable C Compiler with the pdp64 back end, built on [pcc-dmr](https://github.com/moebiusV/pcc/tree/dmr), our fork with the optimizations from the original PDP-11 and VAX compilers.
 - [openbsd-pdp64](https://github.com/moebiusV/openbsd-pdp64/tree/pdp64/pdp64-port): the OpenBSD port: the plan, the assembly to translate, what the compiler must provide, and what each of OpenBSD's mitigations costs on this machine.
 
