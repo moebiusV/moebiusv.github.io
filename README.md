@@ -50,6 +50,7 @@ What started as a light refresh of the PDP-11 for modern times turned into a spe
 
 - [filsys](https://moebiusv.github.io/filsys/): a FUSE driver for the Unix filesystem, from the very first version on the PDP-7 to the last release, Version 10, and others like Coherent and Xenix. Keeping the promise the Linux kernel made in the beginning: it supports existing filesystems. It covers all the different versions of the Unix filesystem with full autodetect and full read/write mounting, plus filesystem creation and repair utilities.
 - [9Frank](https://moebiusv.github.io/9Frank/): a network filesystem protocol that is a superset of all 9P2000 dialects, combining their good features.
+- [9share](https://moebiusv.github.io/9share/): share a directory with another machine over 9P, through ssh. One command on each side; the machine with the files dials out, so the other needs no open port and no server to configure. A connection that drops is picked up again where it stopped, and a file read in order is read ahead the way scp does it. Includes daud, our fork of the diod 9P server.
 
 ## AI
 
@@ -78,6 +79,7 @@ CSV is the universal business interchange format. The csv tool lets you use it s
 ## Networking
 
 - [9Frank](https://moebiusv.github.io/9Frank/): a network filesystem protocol that is a superset of all 9P2000 dialects, combining their good features.
+- [9share](https://moebiusv.github.io/9share/): share a directory with another machine over 9P, through ssh. One command on each side; the machine with the files dials out, so the other needs no open port and no server to configure. A connection that drops is picked up again where it stopped, and a file read in order is read ahead the way scp does it. Includes daud, our fork of the diod 9P server.
 - [wsl-dns-forward](https://moebiusv.github.io/wsl-dns-forward/): makes .local printer and computer names resolve inside WSL2 on Windows 10, so ssh, ping, and CUPS find them. It is for Windows 10; it is compatible with Windows 11, although not needed there.
 - [winless](https://moebiusv.github.io/winless/): a vi-like text editor for Windows. It can run remotely over ssh, and makes it very easy to annotate, edit, and correct documents directly or with the help of an AI.
 
